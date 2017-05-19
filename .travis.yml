@@ -21,8 +21,7 @@ script:
   - ${PWD}/tests/test.sh
 
   # Run script to test PHP version.
-  # TODO: Actually test the version.
-  - 'docker exec ${container_id} env TERM=xterm php -v'
+  - 'docker exec ${container_id} env TERM=xterm php -v | grep "7.1."'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
