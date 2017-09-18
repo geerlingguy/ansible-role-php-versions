@@ -43,7 +43,7 @@ script:
   - ${PWD}/tests/test.sh
 
   # Run script to test PHP version.
-  - 'docker exec ${container_id} env TERM=xterm php -v | grep "${php_version}."'
+  - 'docker exec ${container_id} env TERM=xterm php -v | grep -F "${php_version}."'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
