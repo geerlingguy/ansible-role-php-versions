@@ -1,4 +1,7 @@
 ---
+- name: Update apt cache.
+  apt: update_cache=yes cache_valid_time=86400
+
 - name: Set the correct opcache filename (Ubuntu/Debian).
   set_fact:
     php_opcache_conf_filename: "10-opcache.ini"
