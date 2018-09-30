@@ -43,12 +43,13 @@
 # PHP package purges.
 - name: Purge PHP version packages.
   apt:
-    name:
-      - php5.6-common
-      - php7.0-common
-      - php7.1-common
-      - php7.2-common
+    name: "{{ item }}"
     state: absent
     purge: true
     force: true
+  with_items:
+    - php5.6-common
+    - php7.0-common
+    - php7.1-common
+    - php7.2-common
   when: "'php' + php_version not in item"
