@@ -3,6 +3,15 @@
   set_fact:
     php_opcache_conf_filename: "10-opcache.ini"
 
+- name: Set PHP version packages.
+  set_fact:
+    php_version_packages:
+      - php5.6-common
+      - php7.0-common
+      - php7.1-common
+      - php7.2-common
+      - php7.3-common
+
 - name: Add repository for PHP versions (Ubuntu).
   apt_repository: repo='ppa:ondrej/php'
   when: ansible_distribution == "Ubuntu"
@@ -43,14 +52,7 @@
 # PHP package purges.
 - name: Purge PHP version packages.
   apt:
-    name: "{{ item }}"
+    name: "{{ php_version_packages | reject('match', 'php' + php_version) | list }}"
     state: absent
     purge: true
     force: true
-  with_items:
-    - php5.6-common
-    - php7.0-common
-    - php7.1-common
-    - php7.2-common
-    - php7.3-common
-  when: "'php' + php_version not in item"
