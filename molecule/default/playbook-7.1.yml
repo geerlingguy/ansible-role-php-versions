@@ -20,5 +20,7 @@
 
   post_tasks:
     - name: Confirm PHP version is correct.
-      shell: "php -v | grep -F '{{ php_version }}'"
+      shell: |
+        set -o pipefail
+        php -v | grep -F '{{ php_version }}'
       changed_when: false

@@ -38,7 +38,10 @@
 
 - name: Update apt caches after repo is added (Debian).
   apt: update_cache=true
-  when: php_ondrej_debian_repo.changed and (ansible_distribution == "Debian")
+  when:
+    - php_ondrej_debian_repo.changed
+    - ansible_distribution == "Debian"
+  tags: ['skip_ansible_lint']
 
 # PHP package purges.
 - name: Purge PHP version packages.
