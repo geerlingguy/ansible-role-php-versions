@@ -46,8 +46,9 @@
 # PHP package purges.
 - name: Purge PHP version packages.
   apt:
-    name: ['php5.6-common', 'php7.0-common', 'php7.1-common', 'php7.2-common', 'php7.3-common']
+    name: "{{ __php_versions_debian |
+              reject('search', 'php' ~ php_version) |
+              list }}"
     state: absent
     purge: true
     force: true
-  when: "'php' + php_version not in item"
