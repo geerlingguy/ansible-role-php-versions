@@ -43,12 +43,9 @@
     - ansible_distribution == "Debian"
   tags: ['skip_ansible_lint']
 
-# PHP package purges.
-- name: Purge PHP version packages.
+- name: Purge PHP version packages (besides the currently chosen php_version).
   apt:
-    name: "{{ __php_versions_debian |
-              reject('search', 'php' ~ php_version) |
-              list }}"
+    name: "{{ php_versions_debian | reject('search', 'php' ~ php_version) | list }}"
     state: absent
     purge: true
     force: true

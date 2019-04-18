@@ -38,7 +38,7 @@ __php_packages:
   - "php{{ php_version }}-xml"
   - "php{{ php_version }}-yaml"
 
-__php_versions_debian:
+php_versions_debian:
   - php5.6-common
   - php7.0-common
   - php7.1-common
