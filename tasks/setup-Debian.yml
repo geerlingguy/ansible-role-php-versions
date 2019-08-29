@@ -49,6 +49,7 @@
     state: absent
     purge: true
     force: true
+  register: php_version_purge
 
 - name: Also purge php-common package if any versions were just purged.
   apt:
