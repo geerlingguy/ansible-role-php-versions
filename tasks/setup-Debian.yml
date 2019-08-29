@@ -49,3 +49,11 @@
     state: absent
     purge: true
     force: true
+
+- name: Also purge php-common package if any versions were just purged.
+  apt:
+    name: php-common
+    state: absent
+    purge: true
+    force: true
+  when: php_version_purge.changed | bool
