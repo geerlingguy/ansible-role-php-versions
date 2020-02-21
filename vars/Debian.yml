@@ -10,7 +10,7 @@ __php_extension_conf_paths:
   - "/etc/php/{{ php_version }}/cli/conf.d"
 __php_fpm_daemon: "php{{ php_version }}-fpm"
 __php_fpm_conf_path: "/etc/php/{{ php_version }}/fpm"
-__php_fpm_pool_conf_path: "{{ php_fpm_conf_path }}/pool.d/www.conf"
+__php_fpm_pool_conf_path: "{{ __php_fpm_conf_path }}/pool.d/www.conf"
 __php_mysql_package: "php{{ php_version }}-mysql"
 __php_redis_package: "php{{ php_version }}-redis"
 __php_memcached_package: "php{{ php_version }}-memcached"
@@ -39,8 +39,5 @@ __php_packages:
   - "php{{ php_version }}-yaml"
 
 php_versions_debian:
-  - php5.6-common
-  - php7.0-common
-  - php7.1-common
   - php7.2-common
   - php7.3-common

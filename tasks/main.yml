@@ -6,7 +6,7 @@
     - "{{ role_path }}/vars/{{ ansible_os_family }}-php{{ php_version }}.yml"
 
 - name: Define PHP variables.
-  set_fact: "{{ item.key }}={{ hostvars[inventory_hostname][item.value] }}"
+  set_fact: "{{ item.key }}={{ lookup('vars', item.value) }}"
   when:
     - vars[item.key] is undefined
     - vars[item.value] is defined
@@ -32,9 +32,3 @@
 
 # Setup tasks.
 - include_tasks: "setup-{{ ansible_os_family }}.yml"
-
-- name: Set the correct XHProf package when PHP 5.6 is used.
-  set_fact:
-    xhprof_download_url: https://github.com/phacility/xhprof/archive/master.tar.gz
-    xhprof_download_folder_name: xhprof-master
-  when: php_version == '5.6'
