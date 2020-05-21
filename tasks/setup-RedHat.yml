@@ -21,6 +21,7 @@
 
   - name: Enable DNF module for CentOS 8+.
     shell: |
+      dnf config-manager --set-enabled codeready-builder-for-rhel-8-rhui-rpms
       dnf config-manager --set-enabled PowerTools
       dnf module enable -y php:remi-{{ php_version }}
     args:
