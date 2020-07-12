@@ -19,3 +19,4 @@ provisioner:
   name: ansible
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+    side_effect: side_effect.yml

@@ -1,0 +1,27 @@
+- hosts: all
+  become: true
+  vars:
+    php_enable_webserver: false
+    initial_php_version: "7.3"
+    updated_php_version: "7.4"
+
+  tasks:
+    - name: check PHP version installed
+      shell: php -v | grep -F '{{ php_version }}'
+      changed_when: false
+      vars:
+        php_version: "{{ initial_php_version }}"
+
+    - name: upgrade PHP version installed
+      include_role: name=geerlingguy.php-versions
+      vars:
+        php_version: "{{ updated_php_version }}"
+
+    - include_role: name=geerlingguy.php
+
+    - name: confirm PHP version was updated
+      shell: php -v | grep -F '{{ php_version }}'
+      changed_when: false
+      vars:
+        php_version: "{{ updated_php_version }}"
+
