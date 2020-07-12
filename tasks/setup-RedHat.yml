@@ -19,6 +19,40 @@
       name: dnf-plugins-core
       state: present
 
+  # $ dnf module list --enabled
+  # Remi's Modular repository for Enterprise Linux 8 - x86_64
+  # Name   Stream          Profiles                     Summary
+  # php    remi-7.3 [e]    common [d], devel, minimal   PHP scripting language
+  #
+  # We extract enough information from the output via a RegExp to be able to
+  # reconstruct via AWK a command line compatible name for the module.
+  - name: Check presence of previous remi DNF module
+    shell: |
+      dnf module list --enabled | grep -o -P 'php\s+remi-\d+\.\d+' | awk '{ print $1":"$2 }'
+    args:
+      warn: false
+    register: previous_remi_repo
+    changed_when: php_version not in previous_remi_repo.stdout and previous_remi_repo.stdout != ""
+
+  # $ dnf list "php-*" | grep 'remi-modular$'
+  # php-cli.x86_64      7.3.20-1.el8.remi    @remi-modular
+  # php-common.x86_64   7.3.20-1.el8.remi    @remi-modular
+  # ...
+  - name: Remove PHP packages installed by previous remi module
+    shell: |
+      dnf list --installed "php-*" | grep 'remi-modular$' | awk '{ print $1 }' | xargs dnf remove -y
+    args:
+      warn: false
+    when: previous_remi_repo.changed
+    register: removed_packages
+    changed_when: "'Nothing to do' not in removed_packages.stdout"
+
+  - name: Reset remi DNF module
+    command: dnf module reset -y {{ previous_remi_repo.stdout }}
+    args:
+      warn: false
+    when: previous_remi_repo.changed
+
   - name: Enable DNF module for CentOS 8+.
     shell: |
       dnf config-manager --set-enabled PowerTools
