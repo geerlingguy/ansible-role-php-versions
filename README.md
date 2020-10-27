@@ -1,6 +1,6 @@
 # Ansible Role: PHP Versions
 
-[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-php-versions.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-php-versions)
+[![Build Status](https://travis-ci.com/geerlingguy/ansible-role-php-versions.svg?branch=master)](https://travis-ci.com/geerlingguy/ansible-role-php-versions)
 
 Allows different PHP versions to be installed when using the `geerlingguy.php` role (or a similar role). This role was originally built for [Drupal VM](https://www.drupalvm.com) but was released more generically so others could use an easier mechanism for switching PHP versions.
 
