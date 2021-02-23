@@ -3,3 +3,14 @@ skip_list:
   - 'risky-shell-pipe'
   - 'no-handler'
   - 'role-name'
+
+exclude_paths:
+  - .cache/
+  - .github/
+  # Lint confuses this with a Play and says "'src' is not a valid attribute for a Play"
+  - molecule/default/requirements.yml
+
+mock_roles:
+  - geerlingguy.repo-remi
+  - geerlingguy.php_versions
+  - geerlingguy.php
