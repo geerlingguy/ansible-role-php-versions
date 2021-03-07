@@ -28,12 +28,13 @@ The PHP version to be installed. Any [currently-supported PHP major version](htt
 ## Example Playbook
 
     - hosts: webservers
+      become: true
     
       vars:
         php_version: '7.3'
     
       roles:
-        - role: geerlingguy.repo-remi
+        - name: geerlingguy.repo-remi
           when: ansible_os_family == 'RedHat'
         - geerlingguy.php-versions
         - geerlingguy.php
