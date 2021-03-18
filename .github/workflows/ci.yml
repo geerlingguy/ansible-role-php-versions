@@ -41,7 +41,7 @@ jobs:
     strategy:
       matrix:
         include:
-          # Default PHP version (7.3).
+          # Default PHP version (7.4).
           - distro: centos8
             playbook: converge.yml
           - distro: centos7
@@ -59,19 +59,13 @@ jobs:
           - distro: debian10
             playbook: 8.0.yml
 
-          # PHP 7.4.
+          # PHP 7.3.
           - distro: centos8
-            playbook: 7.4.yml
+            playbook: 7.3.yml
           - distro: ubuntu1804
-            playbook: 7.4.yml
+            playbook: 7.3.yml
           - distro: debian10
-            playbook: 7.4.yml
-
-          # PHP 7.2.
-          - distro: centos8
-            playbook: 7.2.yml
-          - distro: ubuntu1804
-            playbook: 7.2.yml
+            playbook: 7.3.yml
 
     steps:
       - name: Check out the codebase.
