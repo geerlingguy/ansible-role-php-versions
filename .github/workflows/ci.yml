@@ -51,6 +51,14 @@ jobs:
           - distro: debian10
             playbook: converge.yml
 
+          # PHP 8.0.
+          - distro: centos8
+            playbook: 8.0.yml
+          - distro: ubuntu1804
+            playbook: 8.0.yml
+          - distro: debian10
+            playbook: 8.0.yml
+
           # PHP 7.4.
           - distro: centos8
             playbook: 7.4.yml

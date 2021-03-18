@@ -42,3 +42,4 @@ php_versions_debian:
   - php7.2-common
   - php7.3-common
   - php7.4-common
+  - php8.0-common
