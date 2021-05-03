@@ -1,1 +1,3 @@
 *.retry
+# Ignore ansible-lint cache
+/.cache
