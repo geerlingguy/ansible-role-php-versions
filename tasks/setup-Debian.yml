@@ -30,6 +30,7 @@
 
 - name: Add Ondrej Sury's repo (Debian).
   apt_repository:
+    filename: "{{ debian_php_repository_filename | default(omit) }}"
     repo: "{{debian_php_repository}}"
     state: present
   register: php_ondrej_debian_repo
