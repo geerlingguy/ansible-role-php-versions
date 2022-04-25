@@ -1,4 +1,6 @@
 ---
+# Configure PHP repository
+debian_php_repository: "deb https://packages.sury.org/php/ {{ ansible_distribution_release }} main"
 # Configure PHP paths and packages.
 __php_conf_paths:
   - "/etc/php/{{ php_version }}/fpm"
