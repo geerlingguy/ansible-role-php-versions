@@ -42,7 +42,7 @@ jobs:
       matrix:
         include:
           # Default PHP version (7.4).
-          - distro: centos8
+          - distro: rockylinux8
             playbook: converge.yml
           - distro: centos7
             playbook: converge.yml
@@ -52,7 +52,7 @@ jobs:
             playbook: converge.yml
 
           # PHP 8.0.
-          - distro: centos8
+          - distro: rockylinux8
             playbook: 8.0.yml
           - distro: ubuntu1804
             playbook: 8.0.yml
@@ -60,7 +60,7 @@ jobs:
             playbook: 8.0.yml
 
           # PHP 7.3.
-          - distro: centos8
+          - distro: rockylinux8
             playbook: 7.3.yml
           - distro: ubuntu1804
             playbook: 7.3.yml
