@@ -33,8 +33,6 @@
     shell: |
       dnf config-manager --set-enabled powertools
       dnf module enable -y php:remi-{{ php_version }}
-    args:
-      warn: false
     register: dnf_module_enable
     changed_when: "'Nothing to do' not in dnf_module_enable.stdout"
 
