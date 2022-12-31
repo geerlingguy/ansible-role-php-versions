@@ -41,7 +41,7 @@ jobs:
     strategy:
       matrix:
         include:
-          # Default PHP version (8.1).
+          # Default PHP version (8.2).
           - distro: rockylinux8
             playbook: converge.yml
           - distro: centos7
@@ -51,13 +51,13 @@ jobs:
           - distro: debian10
             playbook: converge.yml
 
-          # PHP 8.0.
+          # PHP 8.1.
           - distro: rockylinux8
-            playbook: 8.0.yml
+            playbook: 8.1.yml
           - distro: ubuntu1804
-            playbook: 8.0.yml
+            playbook: 8.1.yml
           - distro: debian10
-            playbook: 8.0.yml
+            playbook: 8.1.yml
 
           # PHP 7.4.
           - distro: rockylinux8
