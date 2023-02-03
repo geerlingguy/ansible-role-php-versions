@@ -21,6 +21,10 @@
   set_fact: php_enablerepo="remi,remi-php81"
   when: php_version == "8.1"
 
+- name: Enable remi repo for PHP 8.2.
+  set_fact: php_enablerepo="remi,remi-php82"
+  when: php_version == "8.2"
+
 # See: https://github.com/ansible/ansible/issues/64852
 - block:
 

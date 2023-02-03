@@ -1,6 +1,6 @@
 ---
 # The PHP version to be installed.
-php_version: '8.1'
+php_version: '8.2'
 
 # For Debian OSes only.
 php_versions_install_recommends: false
