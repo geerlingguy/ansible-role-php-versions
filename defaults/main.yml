@@ -4,3 +4,6 @@ php_version: '8.2'
 
 # For Debian OSes only.
 php_versions_install_recommends: false
+
+#purge other PHP versions
+php_purge_other_versions: true
