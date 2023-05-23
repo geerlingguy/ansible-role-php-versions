@@ -20,6 +20,10 @@ The PHP version to be installed. Any [currently-supported PHP major version](htt
 
 (For Debian OSes only) Whether to install recommended packages. This is set to `no` by default because setting it to `yes` often leads to multiple PHP versions being installed (thus making a bit of a mess) when using repos like Ondrej's PHP PPA for Ubuntu.
 
+Purge other php versions. Note that setting to `false` may cause issues on the RedHat side. Default: true
+
+    php_purge_other_versions: true
+
 ## Dependencies
 
   - geerlingguy.php is a soft dependency as the `php_version` variable is required to be set.
