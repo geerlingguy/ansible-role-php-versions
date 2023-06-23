@@ -10,9 +10,6 @@ galaxy_info:
   issue_tracker_url: https://github.com/geerlingguy/ansible-role-php-versions/issues
   min_ansible_version: 2.10
   platforms:
-    - name: EL
-      versions:
-        - all
     - name: Debian
       versions:
         - all
