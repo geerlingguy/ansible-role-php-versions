@@ -12,9 +12,9 @@ N/A
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    php_version: '8.2'
+    php_version: '8.3'
 
-The PHP version to be installed. Any [currently-supported PHP major version](http://php.net/supported-versions.php) is a valid option (e.g. `7.4`, `8.0`, `8.1`, or `8.2`).
+The PHP version to be installed. Any [currently-supported PHP major version](http://php.net/supported-versions.php) is a valid option (e.g. `7.4`, `8.1`, `8.2`, or `8.3`).
 
     php_versions_install_recommends: false
 
@@ -31,7 +31,7 @@ The PHP version to be installed. Any [currently-supported PHP major version](htt
       become: true
     
       vars:
-        php_version: '8.2'
+        php_version: '8.3'
     
       roles:
         - name: geerlingguy.repo-remi
