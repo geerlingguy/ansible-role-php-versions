@@ -50,7 +50,7 @@ jobs:
             playbook: converge.yml
 
           # PHP 8.2.
-          - distro: rockylinux8
+          - distro: rockylinux9
             playbook: 8.2.yml
           - distro: ubuntu2204
             playbook: 8.2.yml
@@ -58,7 +58,7 @@ jobs:
             playbook: 8.2.yml
 
           # PHP 7.4.
-          - distro: rockylinux8
+          - distro: rockylinux9
             playbook: 7.4.yml
           - distro: ubuntu2004
             playbook: 7.4.yml
