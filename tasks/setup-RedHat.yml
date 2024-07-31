@@ -37,9 +37,9 @@
         name: dnf-plugins-core
         state: present
 
-    - name: Enable DNF module for CentOS 8+.
+    - name: Enable crb and DNF module for CentOS 8+.
       shell: |
-        dnf config-manager --set-enabled powertools
+        dnf config-manager --set-enabled crb
         dnf module enable -y php:remi-{{ php_version }}
       register: dnf_module_enable
       changed_when: "'Nothing to do' not in dnf_module_enable.stdout"
