@@ -39,7 +39,7 @@
 
 - name: Set URI for Ondrej's repo (Debian).
   ansible.builtin.set_fact:
-    ondrej_repo_uri: "https://packages.sury.org/php/dists/{{ ansible_facts['distribution_release'] }}/"
+    ondrej_repo_uri: "https://packages.sury.org/php"
   when: ansible_distribution == "Debian"
 
 - name: Add Ondrej's PHP repo.
