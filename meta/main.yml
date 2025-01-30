@@ -15,10 +15,8 @@ galaxy_info:
         - all
     - name: Ubuntu
       versions:
-        - trusty
-        - xenial
-        - bionic
         - jammy
+        - noble
   galaxy_tags:
     - php
     - web

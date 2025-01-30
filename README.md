@@ -14,7 +14,7 @@ Available variables are listed below, along with default values (see `defaults/m
 
     php_version: '8.3'
 
-The PHP version to be installed. Any [currently-supported PHP major version](http://php.net/supported-versions.php) is a valid option (e.g. `7.4`, `8.1`, `8.2`, or `8.3`).
+The PHP version to be installed. Any [currently-supported PHP major version](http://php.net/supported-versions.php) is a valid option (e.g. `8.1`, `8.2`, or `8.3`).
 
     php_versions_install_recommends: false
 
