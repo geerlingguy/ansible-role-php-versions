@@ -32,14 +32,16 @@
     method: GET
   register: keyserver_response
 
-- name: Set URI for Ondrej's repo (Ubuntu).
+- name: Set data for Ondrej's repo (Ubuntu).
   ansible.builtin.set_fact:
     ondrej_repo_uri: "https://ppa.launchpadcontent.net/ondrej/php/ubuntu"
+    ondrej_repo_signed_by: "{{ keyserver_response.content }}"
   when: ansible_distribution == "Ubuntu"
 
-- name: Set URI for Ondrej's repo (Debian).
+- name: Set data for Ondrej's repo (Debian).
   ansible.builtin.set_fact:
     ondrej_repo_uri: "https://packages.sury.org/php"
+    ondrej_repo_signed_by: "https://packages.sury.org/php/apt.gpg"
   when: ansible_distribution == "Debian"
 
 - name: Add Ondrej's PHP repo.
@@ -51,7 +53,7 @@
     uris: ["{{ ondrej_repo_uri }}"]
     suites: ["{{ ansible_facts['distribution_release'] }}"]
     components: [main]
-    signed_by: "{{ keyserver_response.content }}"
+    signed_by: "{{ ondrej_repo_signed_by }}"
   register: php_ondrej_debian_repo
 
 - name: Update apt caches after repo is added.
