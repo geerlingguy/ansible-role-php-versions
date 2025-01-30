@@ -29,21 +29,21 @@
   set_fact: php_enablerepo="remi,remi-php83"
   when: php_version == "8.3"
 
-# See: https://github.com/ansible/ansible/issues/64852
-- block:
-
+- name: https://github.com/ansible/ansible/issues/64852
+  when: ansible_distribution_major_version | int >= 8
+  block:
     - name: Ensure dnf-plugins are installed on CentOS 8+.
-      yum:
+      ansible.builtin.dnf:
         name: dnf-plugins-core
         state: present
 
-    - name: Enable crb and DNF module for CentOS 8+.
-      shell: |
-        dnf config-manager --set-enabled crb
-        dnf module enable -y php:remi-{{ php_version }}
-      register: dnf_module_enable
-      changed_when: "'Nothing to do' not in dnf_module_enable.stdout"
+    - name: Enable DNF module for CentOS 8+.
+      ansible.builtin.dnf:
+        name: "@php:remi-{{ php_version }}"
+        state: present
 
-  when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version | int >= 8
+- name: Ensure the crb repository is enabled on CentOS 9+.
+  community.general.dnf_config_manager:
+    name: crb
+    state: enabled
+  when: ansible_distribution_major_version | int >= 9
