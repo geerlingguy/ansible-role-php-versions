@@ -60,7 +60,7 @@ jobs:
           # PHP 7.4.
           - distro: ubuntu2004
             playbook: 7.4.yml
-          - distro: debian11
+          - distro: debian12
             playbook: 7.4.yml
 
     steps:
