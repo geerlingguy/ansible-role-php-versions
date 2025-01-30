@@ -34,19 +34,19 @@
 
 - name: Set URI for Ondrej's repo (Ubuntu).
   ansible.builtin.set_fact:
-    ondrej_repo_uri: https://ppa.launchpadcontent.net/ondrej/php/ubuntu
+    ondrej_repo_uri: "https://ppa.launchpadcontent.net/ondrej/php/ubuntu"
   when: ansible_distribution == "Ubuntu"
 
 - name: Set URI for Ondrej's repo (Debian).
   ansible.builtin.set_fact:
-    ondrej_repo_uri: https://packages.sury.org/php/dists/bullseye/
+    ondrej_repo_uri: "https://packages.sury.org/php/dists/{{ ansible_facts['distribution_release'] }}/"
   when: ansible_distribution == "Debian"
 
 - name: Add Ondrej's PHP repo.
   become: true
   ansible.builtin.deb822_repository:
     state: present
-    name: "ondrej-php-{{ ansible_distribution_release }}"
+    name: "ondrej-php-{{ ansible_facts['distribution_release'] }}"
     types: [deb]
     uris: ["{{ ondrej_repo_uri }}"]
     suites: ["{{ ansible_facts['distribution_release'] }}"]
