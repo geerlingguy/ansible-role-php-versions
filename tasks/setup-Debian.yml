@@ -11,10 +11,11 @@
       - python3-debian
     state: present
 
+# Huge thanks to https://www.jeffgeerling.com/comment/34112#comment-34112
 - name: Make API request to Launchpad
   uri:
     url: "https://api.launchpad.net/devel/~ondrej/+archive/ubuntu/php"
-    return_content: yes
+    return_content: true
     method: GET
     headers:
       Accept: "application/json"
@@ -23,6 +24,13 @@
 - name: Parse JSON to extract signing key fingerprint
   ansible.builtin.set_fact:
     signing_key_fingerprint: "{{ launchpad_response.json.signing_key_fingerprint }}"
+
+- name: Retrieve ASCII representation of the key using the signing key fingerprint
+  uri:
+    url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x{{ signing_key_fingerprint }}"
+    return_content: true
+    method: GET
+  register: keyserver_response
 
 - name: Add Ondrej's PHP PPA
   become: true
@@ -33,14 +41,14 @@
     uris: [https://ppa.launchpadcontent.net/ondrej/php/ubuntu]
     suites: ["{{ ansible_facts['distribution_release'] }}"]
     components: [main]
-    signed_by: "{{ signing_key_fingerprint }}"
+    signed_by: "{{ keyserver_response.content }}"
   register: php_ondrej_debian_repo
 
-- name: Update apt caches after repo is added (Debian).
+- name: Update apt caches after repo is added.
   apt: update_cache=true
   when:
     - php_ondrej_debian_repo.changed
-    - ansible_distribution == "Debian"
+    - ansible_os_family == "Debian"
   tags: ['skip_ansible_lint']
 
 - name: Purge PHP version packages (besides the currently chosen php_version).
