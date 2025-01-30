@@ -44,22 +44,20 @@ jobs:
           # Default PHP version.
           - distro: rockylinux9
             playbook: converge.yml
-          - distro: ubuntu2204
+          - distro: ubuntu2404
             playbook: converge.yml
-          - distro: debian11
+          - distro: debian12
             playbook: converge.yml
 
           # PHP 8.2.
           - distro: rockylinux9
             playbook: 8.2.yml
-          - distro: ubuntu2204
+          - distro: ubuntu2404
             playbook: 8.2.yml
-          - distro: debian11
+          - distro: debian12
             playbook: 8.2.yml
 
           # PHP 7.4.
-          - distro: rockylinux9
-            playbook: 7.4.yml
           - distro: ubuntu2004
             playbook: 7.4.yml
           - distro: debian11

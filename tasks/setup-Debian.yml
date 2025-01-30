@@ -3,37 +3,38 @@
   set_fact:
     php_opcache_conf_filename: "10-opcache.ini"
 
-- name: Ensure dirmngr is installed (gnupg dependency).
-  apt:
-    name: dirmngr
-    state: present
-
-- name: Add repository for PHP versions (Ubuntu).
-  apt_repository: repo='ppa:ondrej/php'
-  when: ansible_distribution == "Ubuntu"
-
-# Debian-specific tasks.
-- name: Add dependencies for PHP versions (Debian).
+- name: Add dependencies for PHP versions.
   apt:
     name:
       - apt-transport-https
       - ca-certificates
+      - python3-debian
     state: present
-  when: ansible_distribution == "Debian"
 
-- name: Add Ondrej Sury's apt key (Debian).
-  apt_key:
-    url: https://packages.sury.org/php/apt.gpg
-    id: 15058500A0235D97F5D10063B188E2B695BD4743
-    state: present
-  when: ansible_distribution == "Debian"
+- name: Make API request to Launchpad
+  uri:
+    url: "https://api.launchpad.net/devel/~ondrej/+archive/ubuntu/php"
+    return_content: yes
+    method: GET
+    headers:
+      Accept: "application/json"
+  register: launchpad_response
 
-- name: Add Ondrej Sury's repo (Debian).
-  apt_repository:
-    repo: "deb https://packages.sury.org/php/ {{ ansible_distribution_release }} main"
+- name: Parse JSON to extract signing key fingerprint
+  ansible.builtin.set_fact:
+    signing_key_fingerprint: "{{ launchpad_response.json.signing_key_fingerprint }}"
+
+- name: Add Ondrej's PHP PPA
+  become: true
+  ansible.builtin.deb822_repository:
     state: present
+    name: "ondrej-php-{{ ansible_distribution_release }}"
+    types: [deb]
+    uris: [https://ppa.launchpadcontent.net/ondrej/php/ubuntu]
+    suites: ["{{ ansible_facts['distribution_release'] }}"]
+    components: [main]
+    signed_by: "{{ signing_key_fingerprint }}"
   register: php_ondrej_debian_repo
-  when: ansible_distribution == "Debian"
 
 - name: Update apt caches after repo is added (Debian).
   apt: update_cache=true
