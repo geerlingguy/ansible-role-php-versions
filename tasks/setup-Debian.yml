@@ -74,6 +74,7 @@
     purge: true
     force: true
   register: php_version_purge
+  when: php_purge_other_version
 
 - name: Also purge php-common package if any versions were just purged.
   apt:
@@ -81,4 +82,4 @@
     state: absent
     purge: true
     force: true
-  when: php_version_purge.changed | bool
+  when: php_version_purge.changed | bool and php_purge_other_version

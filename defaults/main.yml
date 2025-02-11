@@ -4,3 +4,7 @@ php_version: '8.3'
 
 # For Debian OSes only.
 php_versions_install_recommends: false
+
+# Purge others version need user confirmation, default to false (no delete)
+# if auto delete, causing break in the existing service which depend to other version
+php_purge_other_version: false
