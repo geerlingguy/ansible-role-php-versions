@@ -20,6 +20,7 @@
     headers:
       Accept: "application/json"
   register: launchpad_response
+  check_mode: false
 
 - name: Parse JSON to extract signing key fingerprint
   ansible.builtin.set_fact:
@@ -31,6 +32,7 @@
     return_content: true
     method: GET
   register: keyserver_response
+  check_mode: false
 
 - name: Set data for Ondrej's repo (Ubuntu).
   ansible.builtin.set_fact:
