@@ -31,5 +31,5 @@
       changed_when: "'Nothing to do' not in dnf_module_enable.stdout"
 
   when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version | int >= 8
+    - ansible_facts.os_family == 'RedHat'
+    - ansible_facts.distribution_major_version | int >= 8

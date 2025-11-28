@@ -40,7 +40,7 @@
     # Remove 'Comment' because response can be out of order.
     # See: https://github.com/geerlingguy/ansible-role-php-versions/issues/94
     ondrej_repo_signed_by: "{{ keyserver_response.content | regex_replace('\nComment.+\n','\n') }}"
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts.distribution == "Ubuntu"
 
 - debug: var=ondrej_repo_signed_by
 
@@ -48,7 +48,7 @@
   ansible.builtin.set_fact:
     ondrej_repo_uri: "https://packages.sury.org/php"
     ondrej_repo_signed_by: "https://packages.sury.org/php/apt.gpg"
-  when: ansible_distribution == "Debian"
+  when: ansible_facts.distribution == "Debian"
 
 - name: Add Ondrej's PHP repo.
   become: true
@@ -66,7 +66,7 @@
   apt: update_cache=true
   when:
     - php_ondrej_debian_repo.changed
-    - ansible_os_family == "Debian"
+    - ansible_facts.os_family == "Debian"
   tags: ['skip_ansible_lint']
 
 - name: Purge PHP version packages (besides the currently chosen php_version).

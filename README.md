@@ -35,7 +35,7 @@ The PHP version to be installed. Any [currently-supported PHP major version](htt
     
       roles:
         - name: geerlingguy.repo-remi
-          when: ansible_os_family == 'RedHat'
+          when: ansible_facts.os_family == 'RedHat'
         - geerlingguy.php-versions
         - geerlingguy.php
 
