@@ -12,6 +12,13 @@
     - __php_packages is defined
     - php_version is version('8.0', '>=')
 
+- name: Remove OpCache extension for PHP 8.5 (included by default)
+  set_fact:
+    __php_packages: "{{ __php_packages | reject('search','php' + php_version + '-opcache') | list }}"
+  when:
+    - __php_packages is defined
+    - php_version is version('8.5', '>=')
+
 - name: Define PHP variables.
   set_fact: "{{ item.key }}={{ lookup('vars', item.value) }}"
   when:
